@@ -15,5 +15,7 @@
             <input type="text" id="name" name="name" value="Pepa"/><br/>
             <input type="submit" value="Send"/>
         </form>
+        <br/>
+        <a href="../showname">Show me Guest Book</a>
     </body>
 </html>

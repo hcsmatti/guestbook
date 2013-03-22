@@ -18,9 +18,9 @@ public class WelcomeController {
 
     /**
      * Controls handShake
-     * @param request
-     * @param response
-     * @param model
+     * @param request  Http request
+     * @param response Http Respons
+     * @param model Data Model
      * @return welcome page
      * @throws Exception 
      */

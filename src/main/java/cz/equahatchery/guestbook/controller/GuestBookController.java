@@ -1,8 +1,8 @@
 package cz.equahatchery.guestbook.controller;
 
-import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,18 +17,28 @@ public class GuestBookController {
 
     /**
      * Controls name typed in form on hello page
-     * @param request
-     * @param response
-     * @param model
+     *
+     * @param request Http request
+     * @param response Http Respons
+     * @param model Data Model
      * @return view with typed name in welcome page
-     * @throws Exception 
+     * @throws Exception
      */
     @RequestMapping("/showname")
-    public String handShake(HttpServletRequest request,
+    public String addGuest(HttpServletRequest request,
             HttpServletResponse response, ModelMap model) throws Exception {
 
-        model.addAttribute("name", request.getParameter("name"));
+        final String name = request.getParameter("name");
 
-        return ("guestList");
+        if (name == null || name.equals("") || name.equalsIgnoreCase("null")) {
+            model.addAttribute("action", "show your name");
+            model.addAttribute("reason", "You did not type your name!");
+            model.addAttribute("link", "./welcome");
+            model.addAttribute("linkCaption", "Take me to home page!");
+            return "fail";
+        } else {
+            model.addAttribute("name", StringEscapeUtils.escapeHtml(name));
+            return ("guestList");
+        }
     }
 }
