@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Basic interface to work with entities
+ * Base interface to work with entities
  * @author Michal Materna
  */
 public interface Repository<T extends Serializable> {
@@ -17,7 +17,10 @@ public interface Repository<T extends Serializable> {
 
     T get(Class<T> clazz, long id);
 
+   
+    void save(T entity);
+    
+    void update(T entity);
+    
     List<T> list(Class<T> clazz);
-
-    void saveOrUpdate(T entity);
 }

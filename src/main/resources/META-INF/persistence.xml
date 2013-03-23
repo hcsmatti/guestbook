@@ -7,7 +7,7 @@
     
     
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-243-233-74.compute-1.amazonaws.com:5432/d4e80gl031spib?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory "/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-243-233-74.compute-1.amazonaws.com:5432/d4e80gl031spib?ssl=true&;sslfactory=org.postgresql.ssl.NonValidatingFactory "/>
       <property name="javax.persistence.jdbc.password" value="TRpd6RLa_IKM63Ct_QsUtlr4iB"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver "/>
       <property name="javax.persistence.jdbc.user" value="vbkbtqcyeztpli"/>
