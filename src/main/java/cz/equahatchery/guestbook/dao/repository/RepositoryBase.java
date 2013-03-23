@@ -20,7 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public abstract class RepositoryBase<T extends Serializable> implements Repository<T> {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAService");
+    EntityManagerFactory emf = Persistence
+            .createEntityManagerFactory("GuestBookPersistanceUnit");
     EntityManager em = emf.createEntityManager();
 
     @Transactional
