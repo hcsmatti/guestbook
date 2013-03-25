@@ -1,10 +1,17 @@
 package cz.equahatchery.guestbook.dao.entity;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +22,10 @@ import javax.persistence.Table;
 @Table(name="guests")
 public class GuestEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "GUEST_ID_GENERATOR", sequenceName = "SEQ_ID_GUEST", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GUEST_ID_GENERATOR")
     private Long id;
 
     private String name;
@@ -52,8 +61,7 @@ public class GuestEntity implements Serializable {
     
     @Override
     public String toString() {
-        return "cz.equahatchery.guestbook.dao.entity.GuestEntity"
-                + "[ id=" + id + ", name=" + name +", time=" + time + " ]";
+        return "" + name +" --- " + time;
     }
     
 }

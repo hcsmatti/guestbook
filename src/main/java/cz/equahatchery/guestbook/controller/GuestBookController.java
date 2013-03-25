@@ -1,11 +1,17 @@
 package cz.equahatchery.guestbook.controller;
 
+import cz.equahatchery.guestbook.dao.entity.GuestEntity;
+import cz.equahatchery.guestbook.dao.repository.GuestRepository;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Controller for work with records in guestbook
@@ -15,30 +21,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class GuestBookController {
 
+    @Inject
+    private GuestRepository repository;
+
     /**
-     * Controls name typed in form on hello page
+     * Controls incoming from hello page and take care about guests signs
      *
      * @param request Http request
-     * @param response Http Respons
-     * @param model Data Model
-     * @return view with typed name in welcome page
-     * @throws Exception
+     * @return view with guests List
      */
-    @RequestMapping("/showname")
-    public String addGuest(HttpServletRequest request,
-            HttpServletResponse response, ModelMap model) throws Exception {
+    @RequestMapping("**/showGuestBook")
+    public ModelAndView guestbook(HttpServletRequest request) {
+        
+        // Handle a new guest (if any):
+        String name = request.getParameter("name");
+        final GuestEntity guest = new GuestEntity();
+        if (name != null) {
+            final SimpleDateFormat df = new SimpleDateFormat("HH:mm dd.MM.YYYY");
+        
+            guest.setName(name);
+            guest.setTime(df.format(Calendar.getInstance().getTime()).toString());
 
-        final String name = request.getParameter("name");
-
-        if (name == null || name.equals("") || name.equalsIgnoreCase("null")) {
-            model.addAttribute("action", "show your name");
-            model.addAttribute("reason", "You did not type your name!");
-            model.addAttribute("link", "./welcome");
-            model.addAttribute("linkCaption", "Take me to home page!");
-            return "fail";
-        } else {
-            model.addAttribute("name", StringEscapeUtils.escapeHtml(name));
-            return ("guestList");
+            repository.save(guest);
         }
+        // Prepare the result view (guestList.jsp):
+        return new ModelAndView("guestList", "GuestRepository", repository);
     }
 }

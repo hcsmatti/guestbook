@@ -1,11 +1,7 @@
-<%-- 
-    Document   : fail
-    Created on : 23.3.2013, 0:07:29
-    Author     : HCS
---%>
+<!DOCTYPE html>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

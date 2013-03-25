@@ -1,13 +1,17 @@
 package cz.equahatchery.guestbook.dao.repository;
 
 import cz.equahatchery.guestbook.dao.entity.GuestEntity;
+import java.util.List;
+
 
 /**
  * Interface for Guest Entity
  * @author Michal Materna
  */
-public interface GuestRepository extends Repository<GuestEntity> {
+public interface GuestRepository {
    
-  public boolean find(String name);  
+  public void save(GuestEntity guest); 
+  
+  public List<GuestEntity> getAllGuests(); 
     
 }
